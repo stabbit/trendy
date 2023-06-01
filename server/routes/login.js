@@ -25,6 +25,7 @@ router.post("/", (req, res, next) => {
                 httpOnly: true,
               });
               res.json({ username, accessToken });
+  
             } else {
               res.sendStatus(401);
             }

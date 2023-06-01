@@ -2,18 +2,20 @@ const db = require('../models/database.js');
 
 const businessController = {};
 
+// DuJ7yPrSVtZzfD-P7mzjvnwhrLRken4Eh5rYm2fCxAj7o3RAKzYQwG84EPILIb_VBlUbAce063ltKVpvo5T5arKRZ1-SsLMb9QF5i2Nv2SdcvBW3VVlX0p3vvwt5ZHYx
+
 // addBusinesses: adds bussiness to DB takes Name, Address, and Ratings
 
 businessController.addBusiness = async (req, res, next) => {
   try {
-    console.log("THIS IS WHAT THE BODY LOOKS LIKE!!@!!!!!!",req.body.business);
-    const { apiId, url, address, image, title, description, score } = req.body.business;
+    console.log("THIS IS WHAT THE BODY LOOKS LIKE!!@!!!!!!",req.body);
+    const { apiId, url, address, image, title, description, score } = req.body;
 
-    const linkedAddress = address[0].concat(" ", address[1])
+    // const linkedAddress = address[0].concat(" ", address[1])
  
-    const linkedDescription = description.map( el => el.title ).join(', ');
+    // const linkedDescription = description.map( el => el.title ).join(', ');
   
-    const values = [apiId, url, linkedAddress, image, title, linkedDescription, score];
+    const values = [apiId, url, address, image, title, description, score];
 
     const check = 'SELECT * FROM businesses WHERE api_Id = $1';
 
@@ -23,7 +25,7 @@ businessController.addBusiness = async (req, res, next) => {
 
       if (result.rows.length > 0) {
         exists = true;
-        res.status(409).json({ error: 'Business already exists', status: 409 });
+        // res.status(409).json({ error: 'Business already exists', status: 409 });
         return next(); 
       }
 

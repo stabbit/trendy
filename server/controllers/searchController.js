@@ -7,6 +7,7 @@ const cheerio = require("cheerio");
 // getBuisnesses: Authenticates Yelp API, searches with v3_business_search from Yelp, assigns businesses to an array of objects in local storage
 
 searchController.getBuisnesses = async (req, res, next) => {
+
   sdk.auth("bearer " + process.env.YELP_API);
 
   const { interest, radius } = req.query;

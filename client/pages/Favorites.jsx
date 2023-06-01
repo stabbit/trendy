@@ -9,7 +9,7 @@ export default function Favorites() {
     fetch('/api/fav', {
       method: 'GET',
       headers: {'Content-Type': 'application/json'},
-      body: {username: displayName}
+      body: JSON.stringify({username: displayName})
     })
       .then((response) => response.json())
       .then((favList) => setFavorites(favList))

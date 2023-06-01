@@ -61,24 +61,11 @@ export default function AppCard(props) {
 
   const { displayName, setDisplayName, isLoggedIn, setLoggedIn } = useOutletContext();
 
-  // const { }
-  // key={index}
-  // title={card.name}
-  // image={card.image_url}
-  // description={card.categories
-  //   .map((category) => category.title)
-  //   .join(", ")}
-  // address={card.location.join(", ")}
-  // score={Math.round(card.averageScore * 100)}
-  // url={card.url}
-  // apiId={card.id}
-  // username={displayName}
-
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
-
+  console.log('this is the props you\'re looking for',props)
   // need a post request 
   const handleFavoriteClick = () => {
     setIsFavorite(!isFavorite);
@@ -94,15 +81,15 @@ export default function AppCard(props) {
   };
   console.log(props.url);
   return (
-    <Card sx={{ maxWidth: 325 }}>
+    <Card sx={{ maxWidth: 325, height: '100%' }}>
       {/* sx prop overrides/defines additional styling */}
       
       <CardHeader
-        
+        sx={{ height: '100%' }}
         title={props.title}
         subheader={props.score}
       />
-      <CardMedia component="img" height="154" image={props.image} alt="Business Image" />
+      <CardMedia component="img" height="30%" image={props.image} alt="Business Image" />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
           {props.description}

@@ -1,4 +1,6 @@
 const db = require('../models/database.js');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const userController = {};
 
@@ -27,18 +29,25 @@ userController.addUser = (req, res, next) => {
     const { username, password } = req.body;
     const values = [username, password];
     const check = `SELECT * FROM users WHERE username = $1`;
+
     db.query(check, [username]).then((result) => {
       if (result.rows.length > 0) {
         return res.status(409).json({ error: 'Username already exists', status: 409 });
       }
       const insertUser = `INSERT INTO users (username, password) VALUES ($1, $2) RETURNING *`;
       db.query(insertUser, values).then((user) => {
-        res.locals.user = user.rows[0].username; // todo: favorites
+        const accessToken = jwt.sign({ username }, process.env.ACCESS_TOKEN_SECRET);
+        res.cookie('accessToken', accessToken, {
+          httpOnly: true,
+        });
+        res.locals.token = { username, accessToken };
+        // console.log(res.locals.token);
         return next();
       });
     });
   } catch (error) {
-    return next(error);
+    // Handle any potential errors
+    next(error);
   }
 };
 

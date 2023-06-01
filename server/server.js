@@ -7,6 +7,7 @@ const express = require('express');
 
 // Require in Parsers
 const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser')
 
 // Require in routers
 const signupRouter = require('./routes/signup');
@@ -20,6 +21,9 @@ const favRouter = require('./routes/fav');
 const app = express();
 const port = 3000;
 
+// Parse JSON and url-encoded bodies
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Serving up static files 
 app.use(express.static('public', { extensions: ['css'] }));

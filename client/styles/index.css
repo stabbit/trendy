@@ -1,24 +1,16 @@
+/* --------------- Global Styles --------------- */
 body {
   font-family: 'Open Sans', sans-serif;
-}
-
-/* .Main .main-image img { */
-.Main .main-image img {
-  width: 40%;
-  margin-left: 450px;
-}
-
-body span h1 {
-  text-align: center;
-  font-style: italic;
-  font-size: 40px;
-  font-weight: 800;
+  background-color: #eaf5ec;
+  width: 100%;
+  min-width: 375px;
 }
 
 h1 {
   text-align: center;
   font-size: 30px;
   font-weight: 800;
+  margin: 0 auto;
 }
 
 h2 {
@@ -35,6 +27,47 @@ input {
   margin-right: 3px;
 }
 
+
+/* --------------- LOGO --------------- */
+.trendy-logo {
+  text-align: center;
+  font-style: italic;
+  font-size: 40px;
+  font-weight: 800;
+}
+
+
+/* --------------- CAROUSEL --------------- */
+.carousel {
+  width: 90%;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.slick-slider {
+  width: 100%;
+  background-color: transparent;
+  color: white;
+  margin-top: 15px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.slick-prev:before,
+.slick-next:before {
+    color: white;
+}
+
+.slick-dots {
+  margin-bottom: 25px;
+}
+
+
+/* --------------- Cards --------------- */
+.cardInCarousel {
+  color: white;
+  display: grid;
+  margin-bottom: 50px;
+}
+
 .cardContainer {
   display: flex;
   flex-direction: column;
@@ -45,34 +78,11 @@ input {
 }
 
 
-
-.slick-slider {
-  width: 100%;
-  background-color: transparent;
-  color: white;
-  margin-top: 15px;
-  font-family: 'Open Sans', sans-serif;
+/* --------------- CARD IMAGE --------------- */
+.Main .main-image img {
+  width: 40%;
+  margin-left: 450px;
 }
 
-.carousel {
-  width: 90%;
-  font-family: 'Open Sans', sans-serif;
-
-}
-
-.slick-prev:before,
-.slick-next:before {
-    color: white;
-}
-
-.cardInCarousel {
-  color: white;
-  display: grid;
-  margin-bottom: 50px;
-}
-
-.slick-dots {
-  margin-bottom: 25px;
-}
 
 

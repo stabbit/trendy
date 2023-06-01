@@ -21,13 +21,14 @@ export default function Login() {
     })
       .then((response) => response.json())
       .then((userData) => {
+        console.log('----------------', username, password)
         if (userData.status !== 401) {
           setDisplayName(userData.username)
-          console.log(userData.accessToken)
           localStorage.setItem('jwt', userData.accessToken)
           setLoggedIn(true);
+          console.log(userData)
           navigate('/', { state: { user: userData } });
-        }
+        } // jimmy is afraid of oauth
       })
       .catch((error) => {
         console.log(error);
@@ -35,18 +36,22 @@ export default function Login() {
         setValidLogin(false)
       });
   };
+
+  // OAuth
   function handleCallbackResponse (res) {
-    // console.log("Encoded JWT ID token" + res.credential);
     const userObject = jwt_decode(res.credential)
-    console.log(userObject); // send userObject.given_name (firstname) and token
+    setDisplayName(userObject.given_name);
+    localStorage.setItem('jwt', res.credential)
+    setLoggedIn(true);
+    navigate('/', { state: { user: { username: displayName, accessToken: res.credential } }})
     // userObject.picture - profile picture
 
   };
 
   useEffect(() => {
-    /* global google */
+    /* global google defined in index.html */
     google.accounts.id.initialize({
-      client_id: "921926110672-m47ae0eakm19m91qbevengblogk3e4dr.apps.googleusercontent.com",
+      client_id: "921926110672-7as5q64ofj723hj7c09h8e3obbcspk54.apps.googleusercontent.com",
       callback: handleCallbackResponse
     });
 
@@ -54,9 +59,7 @@ export default function Login() {
       document.getElementById("googOAUTH"),
       { theme: "outline", size: "large"}
     );
-
-    google.accounts.id.prompt();
-
+    // google.accounts.id.prompt();
   }, []);
 
 
@@ -71,11 +74,10 @@ export default function Login() {
       <form onSubmit={handleSubmit} className='login-form'>
         <TextField id="standard-basic" label="Username" variant="standard" onChange={handleUsernameChange} value={username} sx={{marginRight: 1}} required />
         <TextField id="standard-basic1" label="Password" variant="standard" onChange={handlePasswordChange} type='password' sx={{marginRight: 1}} required />
-        <Button type="submit" variant="outlined" sc={{margin: 10}} >Login</Button>
+        <Button className="login-button" type="submit" variant="outlined" sc={{margin: 10}} >Login</Button>
       </form>
-      <div id='googOAUTH'>
-        </div>
       {validLogin === false ? <p className='error-message'>Invalid login credentials</p> : null}
+      <div id='googOAUTH' />
       <a href='' className='signup-redirect' onClick={() => navigate('/signup')}>Create an Account</a>
     </div>
   );

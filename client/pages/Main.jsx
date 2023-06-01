@@ -1,5 +1,5 @@
-import Carousel from "../containers/Carousel";
-import AppCard from "../components/AppCard";
+import Carousel from "../containers/Carousel.jsx";
+import AppCard from "../components/AppCard.jsx";
 import { useLocation } from "react-router-dom";
 import LinearProgress from "@mui/material/LinearProgress";
 
@@ -36,12 +36,10 @@ export default function Main() {
       },
     })
       .then((response) => {
-        console.log(response)
         return response.json()
       })
       .then((data) => {
         setcardsData(data.sort((a, b) => b.averageScore - a.averageScore));
-        console.log(cardsData);
         setIsLoading(false);
       })
       .catch((error) => {

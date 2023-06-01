@@ -22,17 +22,19 @@ export default function Signup() {
     })
       .then((response) => {
         if (response.status === 409) {
-          
           setLoggedIn(false);
           return undefined
         } else {
           setDisplayName(username);
-          setLoggedIn(true)
+          setLoggedIn(true);
           return response.json();
         }
       })
-      .then((username) => {  
-        if (username) navigate('/', { state: { user: username } });
+      .then((username) => {
+        if (username) {
+          localStorage.setItem('jwt', username.accessToken)
+          navigate('/', { state: { user: { username: username.username, accessToken: username.accessToken } } } )
+        }
         else setUsernameTaken(true)
       })
       .catch((error) => {
@@ -55,7 +57,7 @@ export default function Signup() {
       <form onSubmit={handleSubmit} className='signup-form'>
         <TextField id="standard-basic" label="Username" variant="standard" onChange={handleUsernameChange} value={username} sx={{marginRight: 1}} required />
         <TextField id="standard-basic" label="Password" variant="standard" onChange={handlePasswordChange} type='password' sx={{marginRight: 1}} required />
-        <Button type="submit" variant="outlined" sc={{margin: 10}} >Sign Up</Button>
+        <Button className="login-button" type="submit" variant="outlined" sc={{margin: 10}} >Sign Up</Button>
       </form>
       {usernameTaken === true ? <p className='error-message'>{username} is currently taken!</p> : null}
       <a href='' className='login-redirect' onClick={() => navigate('/login')}>Login Page</a>

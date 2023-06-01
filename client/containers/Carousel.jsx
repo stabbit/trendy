@@ -1,7 +1,7 @@
 import React from "react";
 import { useOutletContext } from "react-router-dom";
 import Slider from "react-slick";
-import AppCard from "../components/AppCard";
+import AppCard from "../components/AppCard.jsx";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
@@ -20,13 +20,33 @@ export default function Carousel(props){
       centerPadding: "30px",
       speed: 100,
 
-      slidesToShow: 5,
+      slidesToShow: 4,
       slidesToScroll: 1,
       step: 0,
-
-      slidesToShow: 3,
-      slidesToScroll: 1,
       // adaptiveHeight: true,
+      responsive: [
+        {
+          breakpoint: 1500,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 5
+          }
+        },
+        {
+          breakpoint: 1200,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 5
+          }
+        },
+        {
+          breakpoint: 900,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 5
+          }
+        },
+      ]
     };
   
     // implement truncateLink or delete
@@ -61,9 +81,8 @@ export default function Carousel(props){
     return (
       <div className="cardContainer">
         <h2> Results </h2>
-        <Slider {...settings}>
-          {cardsJSX}
-        </Slider>
+          <Slider {...settings}> {cardsJSX} </Slider>
       </div>
     );
   }
+  

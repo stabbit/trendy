@@ -50,7 +50,7 @@ export default function Navbar({displayName, isLoggedIn, location, interest, rad
     setLat(lat)
     setLong(long)
   }
-
+  
   const handlePosition = (e) => {
     e.preventDefault();
     navigator.geolocation.getCurrentPosition((showPosition))
