@@ -10,8 +10,13 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 
 export default function Navbar({displayName, isLoggedIn}) {
+  //displayName and isLoggedIn are currently an array. 
+  // Index 0 = Value
+  // Index 1 = Function
   const [location, setLocation] = useState("");
   const [interest, setInterest] = useState("");
+  const [lat, setLat] = useState(null)
+  const [long, setLong] = useState(null)
   const [radius, setRadius] = useState("8050"); // radius takes in meters
   const navigate = useNavigate();
 
@@ -26,12 +31,22 @@ export default function Navbar({displayName, isLoggedIn}) {
     navigate("/main", { state: { ...formData } });
   };
   
-  // turn handle into one function
-  // add name/id attribute to input fields (location, interest, radius)
   const handleLocationChange = (event) => setLocation(event.target.value);
   const handleInterestChange = (event) => setInterest(event.target.value);
   const handleRadiusChange = (event) => setRadius(event.target.value);
 
+  const showPosition = (response) => {
+    let lat = response.coords.latitude;
+    let long = response.coords.longitude;
+    console.log('lat: ', lat, 'lon: ', long)
+    setLat(lat)
+    setLong(long)
+  }
+  const handlePosition = (e) => {
+    e.preventDefault();
+    navigator.geolocation.getCurrentPosition((showPosition))
+  }
+  
   const handleLoginClick = () => {
     if (!isLoggedIn[0]) navigate('/login');
     else {
@@ -47,6 +62,7 @@ export default function Navbar({displayName, isLoggedIn}) {
         <span><h1 onClick={() => navigate('/')}>TRENDY</h1></span>
       </div>
       <div>
+      <button type="button" onClick={handlePosition} value="current" >Current</button>
         <form onSubmit={handleSubmit} className="navbar-submit">
           <TextField value={location} onChange={handleLocationChange} id="standard-basic2" label="Location" variant="standard" sx={{marginRight: 1}}  ></TextField>
           <TextField value={interest} onChange={handleInterestChange} id="standard-basic3" label="Interest" variant="standard" sx={{marginRight: 1}} ></TextField>

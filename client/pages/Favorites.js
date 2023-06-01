@@ -6,7 +6,8 @@ export default function Favorites() {
   const [favorites, setFavorites] = useState({})
 
   useEffect(() => {
-    fetch('/api/getFavs', {
+    fetch('/api/fav', {
+      method: 'GET',
       headers: {'Content-Type': 'application/json'},
       body: {username: displayName}
     })

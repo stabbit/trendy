@@ -72,6 +72,19 @@ export default function AppCard(props) {
 
   const { displayName, setDisplayName, isLoggedIn, setLoggedIn } = useOutletContext();
 
+  // const { }
+  // key={index}
+  // title={card.name}
+  // image={card.image_url}
+  // description={card.categories
+  //   .map((category) => category.title)
+  //   .join(", ")}
+  // address={card.location.join(", ")}
+  // score={Math.round(card.averageScore * 100)}
+  // url={card.url}
+  // apiId={card.id}
+  // username={displayName}
+
   const handleExpandClick = () => {
     setExpanded(!expanded);
     console.log('expanded click');
@@ -79,15 +92,18 @@ export default function AppCard(props) {
   // need a post request 
   const handleFavoriteClick = () => {
     setIsFavorite(!isFavorite);
-    console.log(props.id)
+    console.log(props.apiId)
+    console.log(props.username)
+    console.log(props)
     fetch('/api/fav', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ business: props, username: displayName }),
-      
+      body: JSON.stringify(props),
     })
+      .then((data) => console.log(data))
+      .catch((err) => console.log(err))
   };
 
   const handleMoreVertClick = (event) => {

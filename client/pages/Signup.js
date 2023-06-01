@@ -7,9 +7,6 @@ export default function Signup() {
   const [username, setUsername] = useState('');
   const [usernameTaken, setUsernameTaken] = useState(false);
   const [password, setPassword] = useState('');
-  // const [validSignup, setValidSignup] = useState(null);
-  // const [loggedIn, setLoggedIn] = useOutletContext();
-  // const [displayName, setDisplayName] = useOutletContext();
   const { displayName, setDisplayName, isLoggedIn, setLoggedIn } = useOutletContext();
   const navigate = useNavigate();
 

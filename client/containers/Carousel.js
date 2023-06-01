@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import React from "react";
+import { useOutletContext } from "react-router-dom";
 import Slider from "react-slick";
 import AppCard from "../components/AppCard";
 import 'slick-carousel/slick/slick.css';
@@ -8,6 +9,7 @@ import 'slick-carousel/slick/slick-theme.css';
 // customizable solution for creating image carousels, sliders, and other content sliders on websites.
 
 export default function Carousel(props){
+  const { displayName} = useOutletContext();
   
     const settings = {
       arrows: true,
@@ -50,7 +52,8 @@ export default function Carousel(props){
           address={card.location.join(", ")}
           score={Math.round(card.averageScore * 100)}
           url={card.url}
-          id={card.id}
+          apiId={card.id}
+          username={displayName}
         />
       </div>
     ));

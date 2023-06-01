@@ -40,9 +40,9 @@ app.use('/api/signup', signupRouter);
 app.use('/api/login', loginRouter);
 
 // Global error handler
-app.use(({ code, error }, req, res, next) => {
+app.use((error, req, res, next) => {
   console.log(error)
-  res.status(code).json({ error: error.message });
+  res.status(500).json(error);
 });
 
 // Listening on port 3000

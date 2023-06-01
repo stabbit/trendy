@@ -8,7 +8,7 @@ userController.getUsers = (req, res, next) => {
   try {
     const getUsers = 'SELECT * from users';
     db.query(getUsers).then((users) => {
-      console.log(users.rows);
+      // console.log(users.rows);
       res.locals.users = users.rows;
       return next();
     });

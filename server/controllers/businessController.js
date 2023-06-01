@@ -6,39 +6,37 @@ const businessController = {};
 
 businessController.addBusiness = async (req, res, next) => {
   try {
-    const { id, url, address, image, title, description, score } = req.body.business;
+    console.log("THIS IS WHAT THE BODY LOOKS LIKE!!@!!!!!!",req.body.business);
+    const { apiId, url, address, image, title, description, score } = req.body.business;
 
+    const linkedAddress = address[0].concat(" ", address[1])
+ 
+    const linkedDescription = description.map( el => el.title ).join(', ');
+  
+    const values = [apiId, url, linkedAddress, image, title, linkedDescription, score];
 
-    const test = address[0].concat(" ", address[1])
+    const check = 'SELECT * FROM businesses WHERE api_Id = $1';
 
-    
-    let cache = description.map( el => el.title )
-    cache = cache[0].concat(", ", cache[1])
-    console.log("RIGHT HEREtest cache",cache)
-
-
-    const values = [id, url, test, image, title, cache, score];
-
-    const check = 'SELECT * FROM businesses WHERE api_id = $1';
     let exists = false;
-    await db.query(check, [ id ]).then((result) => {
-      console.log(result)
-      if (result.rows.length > 0) {
-        exists = true
-        return res.status(409).json({ error: 'Business already exists', status: 409 }); 
-      }
-    });
-    if (!exists) { 
-      const insertBusiness = `INSERT INTO businesses (api_id, url, address, image_url, name, categories, ratings ) VALUES ($1, $2, $3, $4, $5, $6, $7)`;
 
-      console.log('after query string')
+    await db.query(check, [ apiId ]).then((result) => {
+
+      if (result.rows.length > 0) {
+        exists = true;
+        res.status(409).json({ error: 'Business already exists', status: 409 });
+        return next(); 
+      }
+
+    });
+
+    if (!exists) { 
+
+      const insertBusiness = 'INSERT INTO businesses (api_Id, url, address, image_url, name, categories, averagescore ) VALUES ($1, $2, $3, $4, $5, $6, $7)';
 
       db.query(insertBusiness, values).then((business) => {
-
-      console.log('after insertion', business);
-
       res.locals.business = business;
       return next();
+
       });
     }
   } catch (error) {
@@ -50,12 +48,16 @@ businessController.addBusiness = async (req, res, next) => {
 
 businessController.allBusinesses = (req, res, next) => {
   try {
+
     const allBusinesses = `SELECT * FROM businesses`;
+
     db.query(allBusinesses).then((businesses) => {
-      console.log(businesses.rows);
+      // console.log(businesses.rows);
       res.locals.businesses = businesses.rows;
       return next();
+
     });
+
   } catch (error) {
     return next(error);
   }

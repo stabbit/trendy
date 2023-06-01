@@ -8,7 +8,7 @@ router.get(
   searchController.getComments,
   searchController.getRatings,
   (req, res, next) => {
-    res.json(res.locals.businesses);
+    res.json(res.locals.addBusinesses);
   }
 );
 

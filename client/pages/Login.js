@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useOutletContext } from "react-router-dom";
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import jwt_decode from "jwt-decode";
 
 export default function Login() {
   const [username, setUsername] = useState('');
@@ -34,6 +35,31 @@ export default function Login() {
         setValidLogin(false)
       });
   };
+  function handleCallbackResponse (res) {
+    // console.log("Encoded JWT ID token" + res.credential);
+    const userObject = jwt_decode(res.credential)
+    console.log(userObject); // send userObject.given_name (firstname) and token
+    // userObject.picture - profile picture
+
+  };
+
+  useEffect(() => {
+    /* global google */
+    google.accounts.id.initialize({
+      client_id: "921926110672-m47ae0eakm19m91qbevengblogk3e4dr.apps.googleusercontent.com",
+      callback: handleCallbackResponse
+    });
+
+    google.accounts.id.renderButton(
+      document.getElementById("googOAUTH"),
+      { theme: "outline", size: "large"}
+    );
+
+    google.accounts.id.prompt();
+
+  }, []);
+
+
 
   const handleUsernameChange = (event) => setUsername(event.target.value);
 
@@ -47,6 +73,8 @@ export default function Login() {
         <TextField id="standard-basic1" label="Password" variant="standard" onChange={handlePasswordChange} type='password' sx={{marginRight: 1}} required />
         <Button type="submit" variant="outlined" sc={{margin: 10}} >Login</Button>
       </form>
+      <div id='googOAUTH'>
+        </div>
       {validLogin === false ? <p className='error-message'>Invalid login credentials</p> : null}
       <a href='' className='signup-redirect' onClick={() => navigate('/signup')}>Create an Account</a>
     </div>
