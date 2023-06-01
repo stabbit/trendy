@@ -18,8 +18,8 @@ passwordController.hashPassword = (req, res, next) => {
 
 // authenticateToken: check req.body for authorization property
 // if authorization property exists, extract the bearer token from response if it exists
-// if token is null notify user that they do not have proper authentication credentials for resources
-// else verify token and provide access if there are no errors
+// if token is null notify user that they do not have proper authentication credentials
+// for resources else verify token and provide access if there are no errors
 
 passwordController.authenticateToken = (req, res, next) => {
   const authHeader = req.headers['authorization'];

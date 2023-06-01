@@ -36,9 +36,9 @@ export default function Navbar({displayName, isLoggedIn}) {
     if (!isLoggedIn[0]) navigate('/login');
     else {
       isLoggedIn[1](false);
+      console.log(isLoggedIn)
       localStorage.removeItem('jwt');
       navigate('/');
-
     }
   }
   return (
