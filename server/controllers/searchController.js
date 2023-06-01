@@ -11,7 +11,7 @@ searchController.getBuisnesses = async (req, res, next) => {
 
   const { interest, radius } = req.query;
   const location = req.query.location.replace(/\s/g, "%20");
-  console.log('--------------------------------', interest, radius, location);
+  // console.log('--------------------------------', interest, radius, location);
   const { data } = await sdk.v3_business_search({
     location,
     term: interest,

@@ -1,16 +1,17 @@
 const express = require('express');
 const router = express.Router();
 const favController = require('../controllers/favController');
+const businessController = require('../controllers/businessController');
 
-router.get('/', favController.getFavs, (req, res, next) => {
+router.get('/', favController.getFavs, (req, res) => {
   res.json(res.locals.favs);
 });
 
-router.post('/', favController.addFav, (req, res, next) => {
-  res.json(res.locals.fav);
+router.post('/', businessController.addBusiness, favController.addFav, (req, res) => {
+  res.status(200).json(res.locals.fav);
 });
 
-router.delete('/', favController.removeFav, (req, res, next) => {
+router.delete('/', favController.removeFav, (req, res) => {
   res.json(res.locals.fav);
 });
 

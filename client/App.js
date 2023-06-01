@@ -12,7 +12,7 @@ import Signup from './pages/Signup'
 import Favorites from './pages/Favorites'
 
 
-
+// Utilizing the <Outlet> component defined inside of Root.js, paths/components Home, Main, Login, Signup, and Favorites will be rendered based on the URL (Navbar will be constantly rendered)
 const router = createBrowserRouter([
   {
     path: "/",
