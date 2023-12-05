@@ -24,7 +24,6 @@ export default function Navbar({displayName, isLoggedIn, location, interest, rad
   const token = localStorage.getItem('jwt')
   if (token) {
     const decodedToken = jwt_decode(token)
-    console.log(decodedToken.picture)
     userPic = decodedToken.picture
   }
 
@@ -46,7 +45,6 @@ export default function Navbar({displayName, isLoggedIn, location, interest, rad
   const showPosition = (response) => {
     let lat = response.coords.latitude;
     let long = response.coords.longitude;
-    console.log('lat: ', lat, 'lon: ', long)
     setLat(lat)
     setLong(long)
   }
@@ -60,7 +58,6 @@ export default function Navbar({displayName, isLoggedIn, location, interest, rad
     if (!isLoggedIn[0]) navigate('/login');
     else {
       isLoggedIn[1](false);
-      console.log(isLoggedIn)
       localStorage.removeItem('jwt');
       navigate('/');
     }
@@ -92,7 +89,6 @@ export default function Navbar({displayName, isLoggedIn, location, interest, rad
       </div>
       <div>
         <span className="userControls">
-          {/* {isLoggedIn[0] === true ? (<span> <span className="userIcon">{displayName[0][0].toUpperCase()}</span> <IconButton aria-label="add to favorites" onClick={() => navigate('/favs')} className="favoriteIcon"><FavoriteIcon /></IconButton> </span>) : null} */}
           {isLoggedIn[0] === true 
               ? (userPic 
                 ? (<span className="center"> <img className="profile-pic" src={userPic}></img><IconButton aria-label="add to favorites" onClick={() => navigate('/favs')} className="favoriteIcon"><FavoriteIcon /></IconButton> </span>)

@@ -19,7 +19,6 @@ export default function Root() {
     if (token) {
       setLoggedIn(true);
       const decodedToken = jwt_decode(token)
-      console.log(decodedToken.username)
       setDisplayName(decodedToken.username)
     }
   }, isLoggedIn)

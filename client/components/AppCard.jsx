@@ -65,8 +65,6 @@ export default function AppCard(props) {
     setExpanded(!expanded);
   };
 
-  console.log('this is the props you\'re looking for',props)
-  // need a post request 
   const handleFavoriteClick = () => {
     setIsFavorite(!isFavorite);
     fetch('/api/fav', {
@@ -79,7 +77,6 @@ export default function AppCard(props) {
       .then((data) => console.log(data))
       .catch((err) => console.log(err))
   };
-  console.log(props.url);
   return (
     <Card sx={{ maxWidth: 325, height: '100%' }}>
       {/* sx prop overrides/defines additional styling */}
