@@ -1,6 +1,8 @@
 # trendy
 A website that offers users a consolidated overview of recent customer experiences.
 
+![Trendy Demo](https://github.com/stabbit/trendy/blob/dev/assets/Dec-05-2023%2013-03-36.gif?raw=true)
+
 ## Installation
 ```sh
 npm install
