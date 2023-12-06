@@ -1,7 +1,14 @@
 # trendy
-A website that offers users a consolidated overview of recent customer experiences.
-
 ![Trendy Demo](https://github.com/stabbit/trendy/blob/dev/assets/Dec-05-2023%2013-03-36.gif?raw=true)
+Trendy is a website that receives a location from the user, returns all activities (food, monuments, parks, etc) matching the prompt, and utilizes Ninja's Sentiment API to analyze recent reviews.
+
+<div align="center" style="display: flex; justify-content: center; gap: 25px;">
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=white">
+  <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB">
+  <img src="https://img.shields.io/badge/Material--UI-0081CB?style=for-the-badge&logo=material-ui&logoColor=white">
+  <img src="https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white">
+  <img src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white">
+</div>
 
 ## Installation
 ```sh
