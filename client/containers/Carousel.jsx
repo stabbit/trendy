@@ -60,7 +60,6 @@ export default function Carousel(props){
     };
   
     const cardsJSX = props.data.map((card, index) => (
-      // div cardInCarousel?
       <div className="cardInCarousel" key={`card${index}`}>
         <AppCard
           key={index}

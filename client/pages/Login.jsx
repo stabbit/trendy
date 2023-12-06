@@ -21,14 +21,12 @@ export default function Login() {
     })
       .then((response) => response.json())
       .then((userData) => {
-        console.log('----------------', username, password)
         if (userData.status !== 401) {
           setDisplayName(userData.username)
           localStorage.setItem('jwt', userData.accessToken)
           setLoggedIn(true);
-          console.log(userData)
           navigate('/', { state: { user: userData } });
-        } // jimmy is afraid of oauth
+        }
       })
       .catch((error) => {
         console.log(error);

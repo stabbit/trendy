@@ -26,11 +26,8 @@ favController.getFavs = async (req, res, next) => {
     WHERE f.user_id = ($1);`;
 
     db.query(getFavs, values).then((favorites) => {
-      // console.log(favorites.rows);
       res.locals.favs = favorites.rows;
-      console.log(res.locals.favs);
       next();
-
     });
   } catch (error) {
     return next(error);
@@ -81,10 +78,8 @@ favController.addFav = async (req, res, next) => {
     
    await db.query(addFav, values).then((fav) => {
       res.locals.fav = fav.rows[0];
-      console.log("THIS IS FAV FROM ADD FAV", fav);
 
     });
-    console.log("!!!!!!!!THIS IS RES>LOCALS>FAV!!!!!!",res.locals.fav)
     return next();
     }  
   } catch (error) {

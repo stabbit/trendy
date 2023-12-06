@@ -2,13 +2,10 @@ const db = require('../models/database.js');
 
 const businessController = {};
 
-// DuJ7yPrSVtZzfD-P7mzjvnwhrLRken4Eh5rYm2fCxAj7o3RAKzYQwG84EPILIb_VBlUbAce063ltKVpvo5T5arKRZ1-SsLMb9QF5i2Nv2SdcvBW3VVlX0p3vvwt5ZHYx
-
 // addBusinesses: adds bussiness to DB takes Name, Address, and Ratings
 
 businessController.addBusiness = async (req, res, next) => {
   try {
-    console.log("THIS IS WHAT THE BODY LOOKS LIKE!!@!!!!!!",req.body);
     const { apiId, url, address, image, title, description, score } = req.body;
 
     // const linkedAddress = address[0].concat(" ", address[1])
@@ -54,7 +51,6 @@ businessController.allBusinesses = (req, res, next) => {
     const allBusinesses = `SELECT * FROM businesses`;
 
     db.query(allBusinesses).then((businesses) => {
-      // console.log(businesses.rows);
       res.locals.businesses = businesses.rows;
       return next();
 

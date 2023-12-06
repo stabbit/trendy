@@ -8,7 +8,6 @@ router.get(
   searchController.getComments,
   searchController.getRatings,
   (req, res, next) => {
-    // res.locals.businesses to display bussneess carousel
     res.json(res.locals.businesses);
   }
 );

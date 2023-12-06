@@ -1,7 +1,5 @@
 const searchController = {};
 const sdk = require("api")("@yelp-developers/v1.0#deudoolf6o9f51");
-// process.env.YELP_API;
-// const data = require("./TEST_DATA"); //comment out after
 const cheerio = require("cheerio");
 
 // getBuisnesses: Authenticates Yelp API, searches with v3_business_search from Yelp, assigns businesses to an array of objects in local storage
@@ -12,7 +10,6 @@ searchController.getBuisnesses = async (req, res, next) => {
 
   const { interest, radius } = req.query;
   const location = req.query.location.replace(/\s/g, "%20");
-  // console.log('--------------------------------', interest, radius, location);
   const { data } = await sdk.v3_business_search({
     location,
     term: interest,
@@ -33,19 +30,8 @@ searchController.getBuisnesses = async (req, res, next) => {
     };
   });
 
-  // res.locals.businesses = data.business; // COMMENT THIS OUT AS WELL!@!!!!!
   next();
 };
-
-// getComments: creates array of buines objects
-// fetch request on each objects's url
-// get all html from provided url stored as array
-// iterate through html array 
-  // web scrape for comments 
-  // push comments into array 
-  // add comment array as a property to object
-
-// returns next
 
 searchController.getComments = async (req, res, next) => {
   Promise.all(
@@ -64,7 +50,6 @@ searchController.getComments = async (req, res, next) => {
       next();
     });
   });
-  // next(); /// comment out after
 };
 
 async function getRatingsHelper(business) {
@@ -75,7 +60,7 @@ async function getRatingsHelper(business) {
           "https://api.api-ninjas.com/v1/sentiment?text=" + comment,
           {
             headers: {
-              "X-Api-Key": process.env.ninja_API,
+              "X-Api-Key": process.env.NINJA_API,
             },
           }
         );
